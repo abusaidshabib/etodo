@@ -31,7 +31,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "etodo.urls"
-AUTH_USER_MODEL = "authentication.MyUser"
+AUTH_USER_MODEL = "authentication.User"
 
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
@@ -76,50 +76,22 @@ MEDIA_ROOT = MEDIA_DIR
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-
-
-if DEBUG:
-    ALLOWED_HOSTS = ["*"]
-    INSTALLED_APPS += [
-        "django_browser_reload",
-        "debug_toolbar",
+ALLOWED_HOSTS = ["*"]
+INSTALLED_APPS += [
+    "django_browser_reload",
+    "debug_toolbar",
+]
+INTERNAL_IPS = [
+    "*",
+]
+MIDDLEWARE += [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
     ]
-    INTERNAL_IPS = [
-        "*",
-    ]
-    MIDDLEWARE += [
-        "debug_toolbar.middleware.DebugToolbarMiddleware",
-        "django_browser_reload.middleware.BrowserReloadMiddleware",
-        ]
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3"
-        }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3"
     }
+}
 
-elif not DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': config('DB_NAME'),
-            'USER': config('DB_USER'),
-            'PASSWORD': config('DB_PASSWORD'),
-            'HOST': config('DB_HOST'),
-            'PORT': ''
-        }
-    }
-
-    AUTH_PASSWORD_VALIDATORS = [
-        {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-        {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-        {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-        {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'}
-    ]
-
-    # Security settings
-    SECURE_BROWSER_XSS_FILTER = True
-    SECURE_CONTENT_TYPE_NOSNIFF = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-    X_FRAME_OPTIONS = 'DENY'
