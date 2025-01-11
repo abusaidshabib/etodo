@@ -31,7 +31,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "etodo.urls"
-# AUTH_USER_MODEL = "authentication.MyUser"
+AUTH_USER_MODEL = "authentication.MyUser"
 
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
