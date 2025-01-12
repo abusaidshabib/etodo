@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 
 from authentication.forms import RegistrationForm
 
-# Create your views here.
+
 def login(request):
     return render(request, 'src/pages/login.html')
 
@@ -14,5 +14,4 @@ def register(request):
             return redirect('login')
     else:
         form = RegistrationForm()
-
     return render(request, 'src/pages/signup.html', {'form': form})
