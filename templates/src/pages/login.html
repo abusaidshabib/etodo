@@ -1,21 +1,12 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block styles %}
+{% extends "base.html" %} {% load static %} {% block styles %}
 <link
   rel="stylesheet"
   href="{% static 'css/pages/login.css' %}"
   as="style"
   onload="this.onload=null;this.rel='stylesheet'"
 />
-{% endblock styles %}
-
-{% block title %}Login{% endblock %}
-
-    {% block sidebar %}
-    {% endblock sidebar %}
-
-{% block content %}
+{% endblock styles %} {% block title %}Login{% endblock %} {% block sidebar %}
+{% endblock sidebar %} {% block content %}
 
 <!-- Start -->
 <section class="relative overflow-hidden">
@@ -29,30 +20,15 @@
             {% include "src/components/shared/logo.html" %}
           </div>
           <div class="title-heading text-center md:my-auto my-20">
-            <form class="text-start">
+            <form method="POST" class="text-start">
+              {% csrf_token %}
               <div class="grid grid-cols-1">
                 <div class="mb-4">
-                  <label class="font-semibold" for="LoginEmail"
-                    >Email Address:</label
-                  >
-                  <input
-                    id="LoginEmail"
-                    type="email"
-                    class="form-input mt-3 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0"
-                    placeholder="email@example.com"
-                  />
+                  {{ form.email.label_tag }} {{ form.email }}
                 </div>
 
                 <div class="mb-4">
-                  <label class="font-semibold" for="LoginPassword"
-                    >Password:</label
-                  >
-                  <input
-                    id="LoginPassword"
-                    type="password"
-                    class="form-input mt-3 w-full py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded outline-none border border-gray-200 focus:border-indigo-600 dark:border-gray-800 dark:focus:border-indigo-600 focus:ring-0"
-                    placeholder="Password:"
-                  />
+                  {{ form.password.label_tag }} {{ form.password }}
                 </div>
 
                 <div class="flex justify-between mb-4">
@@ -70,8 +46,8 @@
                     >
                   </div>
                   <p class="text-slate-400 mb-0">
-                    <a href="auth-re-password.html" class="text-slate-400"
-                      >Forgot password ?</a
+                    <a href="" class="text-slate-400"
+                      >Forgot password?</a
                     >
                   </p>
                 </div>
@@ -83,27 +59,18 @@
                     value="Login / Sign in"
                   />
                 </div>
-
-                <div class="text-center">
-                  <span class="text-slate-400 me-2"
-                    >Don't have an account ?</span
-                  >
-                  <a
-                    href="{% url 'register' %}"
-                    class="text-black dark:text-white font-bold inline-block"
-                    >Sign Up</a
-                  >
-                </div>
               </div>
             </form>
           </div>
         </div>
       </div>
 
-      <div
-        class="xl:w-[70%] lg:w-2/3 md:w-1/2 h-screen"
-      >
-      <img class="min-w-full min-h-full object-cover object-center" src="{% static 'assets/images/login/login.jpg' %}" alt="">
+      <div class="xl:w-[70%] lg:w-2/3 md:w-1/2 h-screen">
+        <img
+          class="min-w-full min-h-full object-cover object-center"
+          src="{% static 'assets/images/login/login.jpg' %}"
+          alt=""
+        />
       </div>
     </div>
   </div>

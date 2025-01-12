@@ -1,5 +1,14 @@
 from django import forms
 from authentication.models import User
+from django.contrib.auth.forms import AuthenticationForm
+
+
+class LoginForm(forms.ModelForm):
+    email = forms.EmailField(widget=forms.EmailInput)
+    password = forms.CharField(widget=forms.PasswordInput)
+    class Meta:
+        model=User
+        fields = ["email", "password"]
 
 class RegistrationForm(forms.ModelForm):
 
